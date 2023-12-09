@@ -19,14 +19,6 @@ public class AuthService {
 		this.restClient = restClient;
 	}
 
-	public TokenDto login(String email, String password) {
-
-		restClient.post()
-			.uri("https://kecommerce.shop/api/auth/token")
-			.contentType(MediaType.APPLICATION_JSON);
-		return null;
-	}
-
 	public Response<TokenDto> login(LoginForm loginForm) {
 		return restClient.post()
 			.uri("https://kecommerce.shop/api/auth/token")
