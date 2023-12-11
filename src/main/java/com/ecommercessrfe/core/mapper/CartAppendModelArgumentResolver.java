@@ -10,6 +10,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.ecommercessrfe.core.service.AuthService;
 import com.ecommercessrfe.core.service.CartService;
+import com.ecommercessrfe.core.service.dto.CartDto;
 import com.ecommercessrfe.core.service.dto.CartProducts;
 
 import jakarta.servlet.http.Cookie;
@@ -33,23 +34,22 @@ public class CartAppendModelArgumentResolver implements HandlerMethodArgumentRes
 	@Override
 	public CartModel resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 		NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		System.out.println("model");
-		CartModel model = new CartModel();
 		HttpServletRequest request = getHttpServletRequest();
 		Cookie[] cookies = request.getCookies();
-
 		if (cookies == null) {
 			return new CartModel();
 		}
-
+		CartModel model = new CartModel();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("token")) {
 				String token = cookie.getValue();
 				authService.validateToken(token);
-				CartProducts cartProducts = cartService.findCartProducts(token)
-					.getEntity()
+				CartDto entity = cartService.findCartProducts(token)
+					.getEntity();
+				CartProducts cartProducts = entity
 					.getCartProducts();
 				model.addAttribute("cart", cartProducts);
+				model.addAttribute("email", entity.getEmail());
 				mavContainer.mergeAttributes(model.asMap());
 			}
 		}

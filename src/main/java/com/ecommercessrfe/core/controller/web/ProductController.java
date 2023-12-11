@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ecommercessrfe.core.mapper.CartAppendModel;
+import com.ecommercessrfe.core.mapper.CartModel;
 import com.ecommercessrfe.core.service.ProductService;
 import com.ecommercessrfe.core.service.dto.ProductListDto;
 import com.ecommercessrfe.core.service.dto.Response;
@@ -28,7 +30,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/test")
-	public String test(Model model) {
+	@CartAppendModel
+	public String test(Model model, CartModel cartModel) {
 		Response<ProductListDto> response = productService.findByCategory("TOP");
 		model.addAttribute("products", response.getEntity().getProducts());
 		return "categories/test";
