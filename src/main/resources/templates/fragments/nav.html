@@ -11,12 +11,23 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/login">Login</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" th:if="${email == null}">
+                        <li>
+                            <a class="dropdown-item" href="/login">Login</a>
+                        </li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
                         <li><a class="dropdown-item" href="/signUp">Sign Up</a></li>
+                    </ul>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" th:unless="${email == null}">
+                        <li>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item" href="/setting">Setting</a></li>
                     </ul>
                 </li>
             </ul>
