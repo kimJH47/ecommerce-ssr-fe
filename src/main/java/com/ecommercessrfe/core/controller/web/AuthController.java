@@ -32,4 +32,9 @@ public class AuthController {
 		redirectAttributes.addFlashAttribute("token", tokenDto.getEntity().getAccessToken());
 		return "redirect:/redirect/success-login";
 	}
+
+	@GetMapping("/signUp")
+	public String signUp() {
+		return "signUp";
+	}
 }
