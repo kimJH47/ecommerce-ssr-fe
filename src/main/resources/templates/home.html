@@ -1,7 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <div th:insert="~{/fragments/header.html :: header}"></div>
 <body>
-<div th:insert="~{/fragments/bodyHeader.html :: bodyHeader}"></div>
-<div th:text ="${token}"></div>
+<div th:insert="~{/fragments/nav.html :: nav(${cart})}"></div>
+<div th:insert="~{/fragments/categories.html :: bodyHeader}"></div>
 </body>
 <div th:insert="~{/fragments/footer.html :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
