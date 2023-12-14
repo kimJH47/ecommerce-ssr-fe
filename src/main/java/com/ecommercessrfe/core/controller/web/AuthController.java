@@ -67,4 +67,18 @@ public class AuthController {
 	public String signUpRedirect() {
 		return "home";
 	}
+
+	@GetMapping("/logout")
+	public String logout(HttpServletResponse httpServletResponse,RedirectAttributes model) {
+		httpServletResponse.addCookie(deleteCookie("token"));
+		model.addFlashAttribute("message","로그아웃 되었습니다.");
+		model.addFlashAttribute("redirectUrl","/");
+		return "redirect:/message-redirect";
+	}
+
+	public Cookie deleteCookie(String name) {
+		Cookie cookie = new Cookie(name, null);
+		cookie.setMaxAge(0);
+		return cookie;
+	}
 }
